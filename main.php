@@ -31,7 +31,8 @@ require_once 'command.php';
 
 $command = new Command();
 echo "Bienvenue dans le gestionnaire de contacts ! Tapez \"help\" pour voir la liste des commandes disponibles.\n\n";
-while (true) {
+$is_running = true;
+while ($is_running) {
     $line = readline("Entrez votre commande : ");
     $matches = [];
     if ($line === "list") {
@@ -83,6 +84,9 @@ while (true) {
         echo "- create <nom>, <email>, <telephone> : Créer un nouveau contact\n";
         echo "- delete <id> : Supprimer un contact\n";
         echo "- update <id> : Mettre à jour un contact (laisser vide pour ne pas modifier un champ)\n";
+    }
+    else if($line === "quit") {
+        $is_running = false;
     }
     else if($line !== "") {
         echo "Commande non reconnue, tapez \"help\" pour voir la liste des commandes disponibles.\n";
