@@ -30,4 +30,14 @@ class Command {
             echo "Contact with ID $id not found.\n";
         }
     }
+
+    public function create($name, $email, $phone) {
+        $contact = $this->contactManager->create($name, $email, $phone);
+        if ($contact) {
+            echo "Contact created: " . $contact->__toString() . "\n";
+        }
+        else {
+            echo "Failed to create contact.\n";
+        }
+    }
 }

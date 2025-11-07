@@ -29,4 +29,18 @@ class ContactManager {
         }
         return $contact;
     }
+
+    public function create($name, $email, $phone_number) {
+        $request = $this->db->prepare("INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)");
+        $success = $request->execute([
+            'name' => $name,
+            'email' => $email,
+            'phone_number' => $phone_number
+        ]);
+        if ($success) {
+            return $this->findById($this->db->lastInsertId());
+        } else {
+            return null;
+        }
+    }
 }
