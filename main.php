@@ -1,15 +1,10 @@
 <?php
-require_once 'db_connect.php';
-require_once 'contact_manager.php';
+require_once 'command.php';
 
-$db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
+$command = new Command();
 while (true) {
     $line = readline("Entrez votre commande : ");
     if ($line === "list") {
-        $contactManager = new ContactManager($db);
-        $contact_list = $contactManager->findAll();
-        foreach ($contact_list as $contact) {
-            echo $contact->__toString() . "\n";
-        }
+        $command->list();
     }
 }
