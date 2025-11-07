@@ -4,16 +4,30 @@ require_once 'db_connect.php';
 
 class Command {
     private $db;
+    private $contactManager;
 
     public function __construct() {
         $this->db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
+        $this->contactManager = new ContactManager($this->db);
     }
 
     public function list() {
-        $contactManager = new ContactManager($this->db);
-        $contact_list = $contactManager->findAll();
+        $contact_list = $this->contactManager->findAll();
+        if (empty($contact_list)) {
+            echo "No contacts found.\n";
+        }
         foreach ($contact_list as $contact) {
             echo $contact->__toString() . "\n";
+        }
+    }
+
+    public function detail($id) {
+        $contact = $this->contactManager->findById($id);
+        if ($contact) {
+            echo $contact->__toString() . "\n";
+        }
+        else {
+            echo "Contact with ID $id not found.\n";
         }
     }
 }
