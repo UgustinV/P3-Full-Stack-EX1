@@ -43,4 +43,10 @@ class ContactManager {
             return null;
         }
     }
+
+    public function delete($id) {
+        $request = $this->db->prepare('DELETE FROM contacts WHERE id = :id');
+        $success = $request->execute(['id' => $id]);
+        return $success;
+    }
 }

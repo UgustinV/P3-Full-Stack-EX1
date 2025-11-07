@@ -40,4 +40,13 @@ class Command {
             echo "Failed to create contact.\n";
         }
     }
+
+    public function delete($id) {
+        $success = $this->contactManager->delete($id);
+        if ($success) {
+            echo "Contact with ID $id deleted successfully.\n";
+        } else {
+            echo "Failed to delete contact with ID $id.\n";
+        }
+    }
 }

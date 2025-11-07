@@ -18,4 +18,8 @@ while (true) {
         $phone = $matches[3];
         $command->create($name, $email, $phone);
     }
+    if(preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
+        $id = $matches[1];
+        $command->delete($id);
+    }
 }
