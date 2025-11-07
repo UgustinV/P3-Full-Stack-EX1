@@ -49,4 +49,13 @@ class Command {
             echo "Failed to delete contact with ID $id.\n";
         }
     }
+
+    public function update($id, $name, $email, $phone) {
+        $contact = $this->contactManager->update($id, $name, $email, $phone);
+        if ($contact) {
+            echo "Contact with ID $id updated successfully.\n";
+        } else {
+            echo "Failed to update contact with ID $id.\n";
+        }
+    }
 }

@@ -49,4 +49,38 @@ class ContactManager {
         $success = $request->execute(['id' => $id]);
         return $success;
     }
+
+    public function update($id, $name, $email, $phone_number) {
+        $setParts = [];
+        $params = ['id' => $id];
+        
+        if ($name !== '') {
+            $setParts[] = "name = :name";
+            $params['name'] = $name;
+        }
+        
+        if ($email !== '') {
+            $setParts[] = "email = :email";
+            $params['email'] = $email;
+        }
+
+        if ($phone_number !== '') {
+            $setParts[] = "phone_number = :phone_number";
+            $params['phone_number'] = $phone_number;
+        }
+
+        if (empty($setParts)) {
+            return $this->findById($id);
+        }
+        
+        $sql = "UPDATE contacts SET " . implode(', ', $setParts) . " WHERE id = :id";
+        $request = $this->db->prepare($sql);
+        $success = $request->execute($params);
+        
+        if ($success) {
+            return $this->findById($id);
+        } else {
+            return null;
+        }
+    }
 }
