@@ -1,8 +1,7 @@
 <?php
 require_once 'db_connect.php';
 
-$db = new DBConnect('localhost', 'p3-ex1');
-var_dump($db);
+$db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
 
 while (true) {
     $line = readline("Entrez votre commande : ");

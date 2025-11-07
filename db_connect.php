@@ -1,16 +1,8 @@
 <?php
 class DBConnect {
-    private $host = "";
-    private $db_name = "";
-
-    public function __construct($host, $db_name) {
-        $this->host = $host;
-        $this->db_name = $db_name;
-    }
-
-    public function getPDO() {
+    public static function getPDO($host, $db_name, $user, $password) {
         try {
-            return new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, 'root', '');
+            return new PDO('mysql:host=' . $host . ';dbname=' . $db_name, $user, $password);
         }
         catch (Exception $e) {
             echo "Connection error: " . $e->getMessage();
