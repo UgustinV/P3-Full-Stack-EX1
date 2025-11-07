@@ -4,8 +4,8 @@ require_once 'contact_manager.php';
 
 $db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
 $contactManager = new ContactManager($db);
-$contacts = $contactManager->findAll();
-var_dump($contacts);
+$contact_list = $contactManager->findAll();
+var_dump($contact_list);
 while (true) {
     $line = readline("Entrez votre commande : ");
     if ($line === "list") {
