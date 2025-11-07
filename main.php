@@ -1,3 +1,32 @@
+/**
+ * Gestionnaire de contacts en ligne de commande
+ * 
+ * Ce script principal fournit une interface en ligne de commande interactive
+ * pour gérer une liste de contacts. Il permet aux utilisateurs d'effectuer
+ * des opérations CRUD (Create, Read, Update, Delete) sur les contacts.
+ * 
+ * Fonctionnalités disponibles :
+ * - list : Affiche tous les contacts existants
+ * - detail <id> : Affiche les détails d'un contact spécifique par son ID
+ * - create <nom>, <email>, <telephone> : Crée un nouveau contact avec validation des données
+ * - delete <id> : Supprime un contact par son ID
+ * - update <id> : Met à jour un contact existant avec validation interactive des champs
+ * - help : Affiche la liste complète des commandes disponibles
+ * 
+ * Validation des données :
+ * - Nom : Lettres uniquement (a-zA-Z)
+ * - Email : Format email valide avec domaine
+ * - Téléphone : Exactement 10 chiffres
+ * 
+ * Le script utilise des expressions régulières pour parser et valider
+ * les commandes utilisateur. Pour la commande update, une validation
+ * interactive permet de laisser des champs vides pour ne pas les modifier.
+ * 
+ * Dépendances :
+ * - Fichier 'command.php' contenant la classe Command
+ * - Fonction readline() pour l'interaction utilisateur
+ */
+
 <?php
 require_once 'command.php';
 
