@@ -37,21 +37,21 @@ while (true) {
     if ($line === "list") {
         $command->list();
     }
-    if(preg_match('/^detail ([0-9]+)$/', $line, $matches)) {
+    else if(preg_match('/^detail ([0-9]+)$/', $line, $matches)) {
         $id = $matches[1];
         $command->detail($id);
     }
-    if(preg_match('/^create ([a-zA-Z]+),\s*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}),\s*([0-9]{10})$/', $line, $matches)) {
+    else if(preg_match('/^create ([a-zA-Z]+),\s*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}),\s*([0-9]{10})$/', $line, $matches)) {
         $name = $matches[1];
         $email = $matches[2];
         $phone = $matches[3];
         $command->create($name, $email, $phone);
     }
-    if(preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
+    else if(preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
         $id = $matches[1];
         $command->delete($id);
     }
-    if(preg_match('/^update ([0-9]+)$/', $line, $matches)) {
+    else if(preg_match('/^update ([0-9]+)$/', $line, $matches)) {
         $id = $matches[1];
         $is_valid = false;
         while(!$is_valid){
@@ -76,7 +76,7 @@ while (true) {
         }
         $command->update($id, $name, $email, $phone);
     }
-    if($line === 'help') {
+    else if($line === 'help') {
         echo "Liste des commandes disponibles :\n\n";
         echo "- list : Lister tous les contacts\n";
         echo "- detail <id> : Afficher les détails d'un contact\n";
@@ -84,7 +84,7 @@ while (true) {
         echo "- delete <id> : Supprimer un contact\n";
         echo "- update <id> : Mettre à jour un contact (laisser vide pour ne pas modifier un champ)\n";
     }
-    else {
+    else if($line !== "") {
         echo "Commande non reconnue, tapez \"help\" pour voir la liste des commandes disponibles.\n";
     }
 }

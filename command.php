@@ -1,6 +1,7 @@
 <?php
 require_once 'contact_manager.php';
 require_once 'db_connect.php';
+require_once 'env_variables.php';
 
 /**
  * Classe Command
@@ -20,7 +21,8 @@ class Command {
      * Configure automatiquement la connexion avec les paramètres par défaut.
      */
     public function __construct() {
-        $this->db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
+        global $DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD;
+        $this->db = DBConnect::getPDO($DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD);
         $this->contactManager = new ContactManager($this->db);
     }
 
