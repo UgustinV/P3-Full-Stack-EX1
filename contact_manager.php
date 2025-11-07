@@ -52,7 +52,7 @@ class ContactManager {
      */
     public function findById(int $id): ?Contact {
         $request = $this->db->prepare("SELECT * FROM contacts WHERE id = :id");
-        $request->bindValue(':id', $id, PDO::PARAM_INT);
+        $request->bindValue(':id', htmlspecialchars($id), PDO::PARAM_INT);
         $request->execute();
         $contact = $request->fetch();
         if ($contact) {
@@ -75,9 +75,9 @@ class ContactManager {
     public function create(string $name, string $email, string $phone_number): ?Contact {
         $request = $this->db->prepare("INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)");
         $success = $request->execute([
-            'name' => $name,
-            'email' => $email,
-            'phone_number' => $phone_number
+            'name' => htmlspecialchars($name),
+            'email' => htmlspecialchars($email),
+            'phone_number' => htmlspecialchars($phone_number)
         ]);
         if ($success) {
             return $this->findById($this->db->lastInsertId());
@@ -96,7 +96,7 @@ class ContactManager {
      */
     public function delete(int $id): bool {
         $request = $this->db->prepare('DELETE FROM contacts WHERE id = :id');
-        $success = $request->execute(['id' => $id]);
+        $success = $request->execute(['id' => htmlspecialchars($id)]);
         return $success;
     }
 
@@ -113,22 +113,23 @@ class ContactManager {
      * @return Contact|null L'objet Contact mis à jour ou null en cas d'échec
      */
     public function update(int $id, string $name, string $email, string $phone_number): ?Contact {
+        $id = htmlspecialchars($id);
         $setParts = [];
         $params = ['id' => $id];
         
         if ($name !== '') {
             $setParts[] = "name = :name";
-            $params['name'] = $name;
+            $params['name'] = htmlspecialchars($name);
         }
         
         if ($email !== '') {
             $setParts[] = "email = :email";
-            $params['email'] = $email;
+            $params['email'] = htmlspecialchars($email);
         }
 
         if ($phone_number !== '') {
             $setParts[] = "phone_number = :phone_number";
-            $params['phone_number'] = $phone_number;
+            $params['phone_number'] = htmlspecialchars($phone_number);
         }
 
         if (empty($setParts)) {
