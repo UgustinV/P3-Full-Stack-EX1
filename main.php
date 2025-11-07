@@ -1,3 +1,4 @@
+<?php
 /**
  * Gestionnaire de contacts en ligne de commande
  * 
@@ -26,8 +27,6 @@
  * - Fichier 'command.php' contenant la classe Command
  * - Fonction readline() pour l'interaction utilisateur
  */
-
-<?php
 require_once 'command.php';
 
 $command = new Command();
