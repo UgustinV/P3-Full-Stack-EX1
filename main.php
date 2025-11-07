@@ -56,4 +56,7 @@ while (true) {
         echo "- delete <id> : Supprimer un contact\n";
         echo "- update <id> : Mettre à jour un contact (laisser vide pour ne pas modifier un champ)\n";
     }
+    else {
+        echo "Commande non reconnue, tapez \"help\" pour voir la liste des commandes disponibles.\n";
+    }
 }

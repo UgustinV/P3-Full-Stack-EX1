@@ -1,42 +1,42 @@
 <?php
 class Contact {
-    private $id;
-    private $name;
-    private $email;
-    private $phone_number;
+    private int $id;
+    private string $name;
+    private string $email;
+    private string $phone_number;
 
-    public function __construct($id, $name, $email, $phone_number) {
+    public function __construct(int $id, string $name, string $email, string $phone_number) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->phone_number = $phone_number;
     }
 
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getName() {
+    public function getName(): string {
         return $this->name;
     }
 
-    public function getEmail() {
+    public function getEmail(): string {
         return $this->email;
     }
 
-    public function getPhoneNumber() {
+    public function getPhoneNumber(): string {
         return $this->phone_number;
     }
 
-    public function setName($name) {
+    public function setName(string $name) {
         $this->name = $name;
     }
 
-    public function setEmail($email) {
+    public function setEmail(string $email) {
         $this->email = $email;
     }
 
-    public function setPhoneNumber($phone_number) {
+    public function setPhoneNumber(string $phone_number) {
         $this->phone_number = $phone_number;
     }
 

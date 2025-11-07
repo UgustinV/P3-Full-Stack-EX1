@@ -1,13 +1,13 @@
 <?php
 require_once 'contact.php';
 class ContactManager {
-    private $db;
+    private PDO $db;
 
-    public function __construct($db) {
+    public function __construct(PDO $db) {
         $this->db = $db;
     }
 
-    public function findAll() {
+    public function findAll(): array {
         $contact_list = [];
         $request = $this->db->prepare("SELECT * FROM contacts");
         $request->execute();
@@ -19,7 +19,7 @@ class ContactManager {
         return $contact_list;
     }
 
-    public function findById($id) {
+    public function findById(int $id): ?Contact {
         $request = $this->db->prepare("SELECT * FROM contacts WHERE id = :id");
         $request->bindValue(':id', $id, PDO::PARAM_INT);
         $request->execute();
@@ -30,7 +30,7 @@ class ContactManager {
         return $contact;
     }
 
-    public function create($name, $email, $phone_number) {
+    public function create(string $name, string $email, string $phone_number): ?Contact {
         $request = $this->db->prepare("INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)");
         $success = $request->execute([
             'name' => $name,
@@ -44,13 +44,13 @@ class ContactManager {
         }
     }
 
-    public function delete($id) {
+    public function delete(int $id): bool {
         $request = $this->db->prepare('DELETE FROM contacts WHERE id = :id');
         $success = $request->execute(['id' => $id]);
         return $success;
     }
 
-    public function update($id, $name, $email, $phone_number) {
+    public function update(int $id, string $name, string $email, string $phone_number): ?Contact {
         $setParts = [];
         $params = ['id' => $id];
         

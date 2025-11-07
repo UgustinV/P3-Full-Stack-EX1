@@ -3,8 +3,8 @@ require_once 'contact_manager.php';
 require_once 'db_connect.php';
 
 class Command {
-    private $db;
-    private $contactManager;
+    private PDO $db;
+    private ContactManager $contactManager;
 
     public function __construct() {
         $this->db = DBConnect::getPDO('localhost', 'p3-ex1', 'root', '');
@@ -21,7 +21,7 @@ class Command {
         }
     }
 
-    public function detail($id) {
+    public function detail(int $id) {
         $contact = $this->contactManager->findById($id);
         if ($contact) {
             echo $contact->__toString() . "\n";
@@ -31,7 +31,7 @@ class Command {
         }
     }
 
-    public function create($name, $email, $phone) {
+    public function create(string $name, string $email, string $phone) {
         $contact = $this->contactManager->create($name, $email, $phone);
         if ($contact) {
             echo "Contact created: " . $contact->__toString() . "\n";
@@ -41,7 +41,7 @@ class Command {
         }
     }
 
-    public function delete($id) {
+    public function delete(int $id) {
         $success = $this->contactManager->delete($id);
         if ($success) {
             echo "Contact with ID $id deleted successfully.\n";
@@ -50,7 +50,7 @@ class Command {
         }
     }
 
-    public function update($id, $name, $email, $phone) {
+    public function update(int $id, string $name, string $email, string $phone) {
         $contact = $this->contactManager->update($id, $name, $email, $phone);
         if ($contact) {
             echo "Contact with ID $id updated successfully.\n";
